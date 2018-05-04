@@ -424,7 +424,7 @@ func generateTorusPoints(cx, cy, cz, r1, r2 float64) *Matrix {
 			theta := 2.0 * math.Pi * j
 			x := math.Cos(phi)*(r1*math.Cos(theta)+r2) + cx
 			y := r1*math.Sin(theta) + cy
-			z := -math.Sin(phi)*(r1*math.Cos(theta)+r2) + cz
+			z := math.Sin(phi)*(r1*math.Cos(theta)+r2) + cz
 			m.AddPoint(x, y, z)
 		}
 	}
