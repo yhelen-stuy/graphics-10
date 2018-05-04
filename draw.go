@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	sphereStepSize float64 = 1.0 / 17
-	torusStepSize  float64 = 1.0 / 10
+	sphereStepSize float64 = 1.0 / 50
+	torusStepSize  float64 = 1.0 / 25
 )
 
 func (image Image) DrawPolygons(p *Matrix, c Color) {
@@ -371,17 +371,11 @@ func (m *Matrix) AddSphere(cx, cy, cz, r float64) {
 
 func generateSpherePoints(cx, cy, cz, r float64) *Matrix {
 	m := MakeMatrix(4, 0)
-	var end float64
 	// Rotating
-	if sphereStepSize > 15 {
-		end = 1 + sphereStepSize
-	} else {
-		end = 1.0
-	}
-	for i := 0.0; i <= end; i += sphereStepSize {
+	for i := 0.0; i <= 1+sphereStepSize; i += sphereStepSize {
 		phi := 2.0 * math.Pi * i
 		// Semicircle
-		for j := 0.0; j <= end; j += sphereStepSize {
+		for j := 0.0; j <= 1+sphereStepSize; j += sphereStepSize {
 			theta := math.Pi * j
 			x := r*math.Cos(theta) + cx
 			y := r*math.Sin(theta)*math.Cos(phi) + cy
@@ -422,17 +416,11 @@ func (m *Matrix) AddTorus(cx, cy, cz, r1, r2 float64) {
 // r2: Radius of torus
 func generateTorusPoints(cx, cy, cz, r1, r2 float64) *Matrix {
 	m := MakeMatrix(4, 0)
-	var end float64
-	if torusStepSize > 10 {
-		end = 1 + torusStepSize
-	} else {
-		end = 1.0
-	}
 	// Rotating
-	for i := 0.0; i < end; i += torusStepSize {
+	for i := 0.0; i < 1+torusStepSize; i += torusStepSize {
 		phi := 2.0 * math.Pi * i
 		// Circle
-		for j := 0.0; j < end; j += torusStepSize {
+		for j := 0.0; j < 1+torusStepSize; j += torusStepSize {
 			theta := 2.0 * math.Pi * j
 			x := math.Cos(phi)*(r1*math.Cos(theta)+r2) + cx
 			y := r1*math.Sin(theta) + cy
