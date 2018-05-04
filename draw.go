@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	sphereStepSize float64 = 1.0 / 15
+	sphereStepSize float64 = 1.0 / 17
 	torusStepSize  float64 = 1.0 / 10
 )
 
@@ -38,11 +38,13 @@ func (image Image) DrawPolygons(p *Matrix, c Color) {
 			continue
 		}
 		if cross[2] > 0 {
-			cnew = Color{
-				r: cnew.r + 37%255,
-				g: cnew.g + 41%255,
-				b: cnew.b + 59%255,
-			}
+			ambient := Color{r: 50, g: 50, b: 50}
+			aReflect := []float64{0.1, 0.1, 0.1}
+			dReflect := []float64{0.5, 0.5, 0.5}
+			sReflect := []float64{0.5, 0.5, 0.5}
+			lights := []Light{Light{location: []float64{0.5, 0.75, 1}, color: Color{r: 0, g: 255, b: 255}}}
+			view := []float64{0, 0, 1}
+			cnew = CalcLighting(p0, p1, p2, aReflect, dReflect, sReflect, view, ambient, lights)
 			// image.DrawLine(cnew, int(p0[0]), int(p0[1]), p0[2], int(p1[0]), int(p1[1]), p1[2])
 			// image.DrawLine(cnew, int(p1[0]), int(p1[1]), p1[2], int(p2[0]), int(p2[1]), p2[2])
 			// image.DrawLine(cnew, int(p2[0]), int(p2[1]), p2[2], int(p0[0]), int(p0[1]), p0[2])

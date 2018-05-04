@@ -44,3 +44,21 @@ func Magnitude(v []float64) float64 {
 	}
 	return math.Sqrt(sum)
 }
+
+func Normalize(v []float64) []float64 {
+	m := Magnitude(v)
+	for i := range v {
+		v[i] = v[i] / m
+	}
+	return v
+}
+
+func Normal(p0, p1, p2 []float64) ([]float64, error) {
+	v1 := MakeVector(p0[0], p0[1], p0[2], p1[0], p1[1], p1[2])
+	v2 := MakeVector(p0[0], p0[1], p0[2], p2[0], p2[1], p2[2])
+	normal, err := CrossProduct(v1, v2)
+	if err != nil {
+		return nil, err
+	}
+	return normal, nil
+}

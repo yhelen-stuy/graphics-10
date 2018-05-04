@@ -48,7 +48,6 @@ func (image Image) plot(c Color, x, y int, z float64) error {
 		return errors.New("Error: Coordinate invalid")
 	}
 	z = float64(int(z*1000)) / 1000.0
-	fmt.Println(z)
 	if z > image.zBuf[x][y] {
 		image.img[x][y] = c
 		image.zBuf[x][y] = z
@@ -107,4 +106,22 @@ func (image Image) Display() error {
 	_, err := c.Output()
 	os.Remove(f)
 	return err
+}
+
+func (c Color) Limit() {
+	if c.r < 0 {
+		c.r = 0
+	} else if c.r > 255 {
+		c.r = 255
+	}
+	if c.g < 0 {
+		c.g = 0
+	} else if c.g > 255 {
+		c.g = 255
+	}
+	if c.b < 0 {
+		c.b = 0
+	} else if c.b > 255 {
+		c.b = 255
+	}
 }
