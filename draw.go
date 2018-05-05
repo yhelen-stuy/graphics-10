@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	sphereStepSize float64 = 1.0 / 50
-	torusStepSize  float64 = 1.0 / 25
+	sphereStepSize float64 = 1.0 / 60
+	torusStepSize  float64 = 1.0 / 50
 )
 
 func (image Image) DrawPolygons(p *Matrix, c Color) {
@@ -383,6 +383,7 @@ func generateSpherePoints(cx, cy, cz, r float64) *Matrix {
 			m.AddPoint(x, y, z)
 		}
 	}
+	fmt.Println(m.cols)
 	return m
 }
 
