@@ -383,7 +383,6 @@ func generateSpherePoints(cx, cy, cz, r float64) *Matrix {
 			m.AddPoint(x, y, z)
 		}
 	}
-	fmt.Println(m.cols)
 	return m
 }
 
