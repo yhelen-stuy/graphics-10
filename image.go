@@ -108,7 +108,7 @@ func (image Image) Display() error {
 	return err
 }
 
-func (c Color) Limit() {
+func (c *Color) Limit() {
 	if c.r < 0 {
 		c.r = 0
 	} else if c.r > 255 {
