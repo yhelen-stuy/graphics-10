@@ -77,11 +77,12 @@ func calcSpecularLighting(p0, p1, p2, view, Ks []float64, l Light) Color {
 	spec, _ := DotProduct(diff, view)
 	spec = math.Pow(spec, 6)
 	r := int(math.Max(float64(l.color.r)*Ks[0]*spec, 0))
-	g := int(math.Max(float64(l.color.g)*Ks[0]*spec, 0))
-	b := int(math.Max(float64(l.color.b)*Ks[0]*spec, 0))
-	return Color{
+	g := int(math.Max(float64(l.color.g)*Ks[1]*spec, 0))
+	b := int(math.Max(float64(l.color.b)*Ks[2]*spec, 0))
+	c := Color{
 		r: r,
 		g: g,
 		b: b,
 	}
+	return c
 }
